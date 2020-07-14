@@ -1,0 +1,28 @@
+
+{                                                                                
+  "name": "be.eloistree.rehackunitycore",                              
+  "displayName": "ReHackUnityCore",                        
+  "version": "0.0.1",                         
+  "unity": "2018.1",                             
+  "unityRelease": "",                             
+  "description": "A tool allowing to listen to message from various of chat mainly coming from Restream Chat Application.",                         
+  "keywords": ["Script","Tool"],                       
+  "dependencies":{},     
+  "relatedPackages":{},     
+  "samples" : [
+{
+"displayName":"UDP" ,
+"description":"" ,
+"path":"Samples/UDP"
+}],     
+  "author" : {
+"name":"",
+"mail":"",
+"url":""},     
+  "repository":{
+"type":"Git",
+"url":"https://github.com/EloiStree/2020_07_12_ReHackUnityCore.git",
+"footprint":"",
+"revision":"1dc3fa32685d040f5c40e779857d0417c95c60eb"},     
+  "category": "Script"                   
+} 
