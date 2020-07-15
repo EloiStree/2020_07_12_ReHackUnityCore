@@ -75,12 +75,13 @@ public class UDPReceive
     // init
     private void init()
     {
-        
-        m_receiveThread = new Thread(
-            new ThreadStart(ReceiveData));
-        m_receiveThread.Priority = m_threadPriority;
-        m_receiveThread.IsBackground = true;
-        m_receiveThread.Start();
+        if (m_receiveThread == null) { 
+            m_receiveThread = new Thread(
+                new ThreadStart(ReceiveData));
+            m_receiveThread.Priority = m_threadPriority;
+            m_receiveThread.IsBackground = true;
+            m_receiveThread.Start();
+        }
 
     }
 
@@ -89,7 +90,7 @@ public class UDPReceive
     {
 
         IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, m_port);
-        m_client = new UdpClient(m_port);
+        m_client = new UdpClient(anyIP);
        // m_client.Connect(anyIP);
         while (true)
         {

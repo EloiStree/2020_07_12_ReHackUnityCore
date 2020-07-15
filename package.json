@@ -7,7 +7,9 @@
   "unityRelease": "",                             
   "description": "A tool allowing to listen to message from various of chat mainly coming from Restream Chat Application.",                         
   "keywords": ["Script","Tool"],                       
-  "dependencies":{},     
+  "dependencies":{
+  "be.eloistree.license":"0.0.1"
+  },     
   "relatedPackages":{},     
   "samples" : [
 {
