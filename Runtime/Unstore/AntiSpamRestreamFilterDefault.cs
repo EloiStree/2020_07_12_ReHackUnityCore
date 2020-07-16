@@ -7,6 +7,7 @@ using System;
 
 public class AntiSpamRestreamFilterDefault : MonoBehaviour
 {
+    public bool m_filterActiveState;
     public RestreamMessageUnityEvent m_onValidate;
     public RestreamMessageUnityEvent m_onRefused;
 
@@ -15,6 +16,7 @@ public class AntiSpamRestreamFilterDefault : MonoBehaviour
     public int m_spamCreditByTik = 10;
     public float m_timeBetweenTik = 10;
     public int m_consumedByMessage = 20;
+
 
     [Header("Debug")]
     public List<UserCreditState> m_listOfSpammers = new List<UserCreditState>();
@@ -29,6 +31,8 @@ public class AntiSpamRestreamFilterDefault : MonoBehaviour
         }
     }
     public void AddSpamCredit() {
+        if (m_filterActiveState == false)
+            return;
 
         string [] users = m_userSpamCredit.Keys.ToArray();
         m_listOfSpammers.Clear();
@@ -47,17 +51,24 @@ public class AntiSpamRestreamFilterDefault : MonoBehaviour
 
     public void TryToPush(RestreamChatMessage message) {
 
-        int credit = GetUserCredit(message.UserID);
-        bool isSpammer = credit <= 0;
-        if (isSpammer)
+        if (m_filterActiveState )
         {
-            m_onRefused.Invoke(message);
+            int credit = GetUserCredit(message.UserID);
+            bool isSpammer = credit <= 0;
+            if (isSpammer)
+            {
+                m_onRefused.Invoke(message);
+            }
+            else
+            {
+                m_onValidate.Invoke(message);
+            }
+            credit -= m_consumedByMessage;
+            SetUserCredit(message.UserID, credit);
         }
-        else { 
+        else {
             m_onValidate.Invoke(message);
         }
-        credit -= m_consumedByMessage;
-        SetUserCredit(message.UserID, credit);
 
 
     }

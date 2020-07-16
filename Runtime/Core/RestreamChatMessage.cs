@@ -95,7 +95,7 @@ namespace RestreamChatHacking
         }
         public DateTime GetWhenAsDateTime()
         {
-            return DateTime.ParseExact(Date + When, "yyyy-MM-ddhh:mm:ss", CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(Date + When, "yyyy-MM-ddHH:mm:ss", CultureInfo.InvariantCulture);
         }
         public bool IsDateDefined() { return !string.IsNullOrEmpty(m_date); }
         public void SetDateToNow()

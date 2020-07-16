@@ -4,15 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using RestreamChatHacking;
 public class MonoRestreamListener : MonoBehaviour
 {
     public RestreamMessageUnityEvent m_onReceivedMessage;
     public Queue<RestreamChatMessage> m_receivedToPushOnUpdate= new Queue<RestreamChatMessage>();
      
-    void Start()
+    void Awake()
     {
-        Restream.Listener.AddNewMessageListener(TriggerUnityEventAtUpdate); 
+        Restream.Listener.AddNewMessageListener(this.TriggerUnityEventAtUpdate); 
     }
     private void Update()
     {
@@ -23,6 +22,7 @@ public class MonoRestreamListener : MonoBehaviour
 
     private void TriggerUnityEventAtUpdate(RestreamChatMessage newMessage)
     {
+
         m_receivedToPushOnUpdate.Enqueue(newMessage);
     }
 

@@ -18,6 +18,8 @@ public class ListenToUDPRestream : MonoBehaviour
     public string m_lastMessage;
     public RestreamChatMessage m_lastRCM;
     public RestreamMessageUnityEvent m_receivedMessage;
+    [TextArea(0,5)]
+    public string m_history;
     void Awake()
     {
         m_udpReceiver = new UDPReceive(portToListen, m_threadPriority);
@@ -32,6 +34,7 @@ public class ListenToUDPRestream : MonoBehaviour
             if (m_udpReceiver.m_allReceivedUDPPackets.Count > 0)
             {
                 msg = m_udpReceiver.m_allReceivedUDPPackets.Dequeue();
+                m_history = msg + m_history;
                 if (msg != null) { 
                   // Debug.Log(msg);
                     m_lastRCM.SetWithOneLiner(msg.Trim());
