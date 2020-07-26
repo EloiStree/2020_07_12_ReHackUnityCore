@@ -68,6 +68,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_history: 
 --- !u!114 &5825966879210179638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,8 +102,9 @@ MonoBehaviour:
   - Discord:Troll
   m_messageLeadingToBans:
   - "RCM\xA62020-07-14\xA618:45:34\xA6Troll\xA6Discord\xA6test\xB6"
-  m_inProjectBanUsers: {fileID: 0}
-  m_inProjectBanMessages: {fileID: 0}
+  m_inProjectBanUsers: {fileID: 4900000, guid: da7f3b2f2112af44a8d943e336e89cbd, type: 3}
+  m_inProjectBanMessages: {fileID: 4900000, guid: 2860e625fbe1c4e4383a763af9889a16,
+    type: 3}
   m_urlOfBanListFileUsers: 
   m_urlOfBanListFileMessages: 
   m_currentlyBan: []
@@ -118,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1df31eedab08544989c64d68f7e1692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_filterActiveState: 0
   m_onValidate:
     m_PersistentCalls:
       m_Calls:
