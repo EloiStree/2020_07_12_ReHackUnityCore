@@ -43,6 +43,7 @@ namespace RestreamChatHacking
             return new RestreamChatUser(m_userName, m_platformId);
         }
 
+
         [SerializeField] string m_message;
 
         public string Message
