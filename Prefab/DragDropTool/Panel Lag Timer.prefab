@@ -544,6 +544,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_lookingFor:
-  - '#lag '
+  - '!lag '
   m_filterType: 1
   m_ignoreCase: 1

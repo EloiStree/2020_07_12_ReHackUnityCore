@@ -25,7 +25,7 @@ namespace RestreamChatHacking
         }
 
 
-        public string Id
+        public string MessageId
         {
             get { return Timestamp + "|" + UserName; }
         }
@@ -36,6 +36,11 @@ namespace RestreamChatHacking
             message = new RestreamChatMessage();
             message.SetWithOneLiner(oneliner);
             succed = message.IsCorrectlyDefined();
+        }
+
+        public RestreamChatUser GetAsUserInfo()
+        {
+            return new RestreamChatUser(m_userName, m_platformId);
         }
 
         [SerializeField] string m_message;
