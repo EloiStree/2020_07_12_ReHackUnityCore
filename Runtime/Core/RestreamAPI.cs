@@ -23,6 +23,7 @@ namespace RestreamChatHacking
             private static OnRestreamMessageEvent m_onNewMessage;
             public static  void AddNewMessageListener(OnRestreamMessageEvent toDo)
             {
+                m_onNewMessage -= toDo;
                 m_onNewMessage += toDo;
             }
             public static void RemoveNewMessageListener(OnRestreamMessageEvent toDo)

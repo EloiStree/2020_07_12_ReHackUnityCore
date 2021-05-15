@@ -26,6 +26,8 @@ public class ListenToUDPRestream : MonoBehaviour
     }
     private void Update()
     {
+        if (m_lastMessage == null || m_udpReceiver==null)
+            return;
         m_lastMessage = m_udpReceiver.m_lastReceivedUDPPacket;
         string msg = null;
         do
@@ -33,7 +35,7 @@ public class ListenToUDPRestream : MonoBehaviour
             if (m_udpReceiver.m_allReceivedUDPPackets.Count > 0)
             {
                 msg = m_udpReceiver.m_allReceivedUDPPackets.Dequeue();
-                m_history = msg + m_history;
+                m_history = msg+"\n" + m_history;
                 if (msg != null) { 
                   // Debug.Log(msg);
                     m_lastRCM.SetWithOneLiner(msg.Trim());
@@ -48,8 +50,15 @@ public class ListenToUDPRestream : MonoBehaviour
     }
     void OnDisable()
     {
-        m_udpReceiver.Kill();
+        if (m_udpReceiver != null)
+            m_udpReceiver.Kill();
         
+    }
+    private void OnApplicationQuit()
+    {
+
+        if(m_udpReceiver!=null)
+        m_udpReceiver.Kill();
     }
 }
 
@@ -77,11 +86,14 @@ public class UDPReceive
     // init
     private void init()
     {
-        if (m_receiveThread == null) { 
+        if (m_receiveThread == null)
+        {
+            m_stayAlive = false;
             m_receiveThread = new Thread(
                 new ThreadStart(ReceiveData));
             m_receiveThread.Priority = m_threadPriority;
             m_receiveThread.IsBackground = true;
+            m_stayAlive = true;
             m_receiveThread.Start();
         }
 
@@ -90,11 +102,11 @@ public class UDPReceive
     // receive thread
     private void ReceiveData()
     {
-
+        m_stayAlive = true;
         IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, m_port);
         m_client = new UdpClient(anyIP);
        // m_client.Connect(anyIP);
-        while (true)
+        while (m_stayAlive)
         {
 
             try
@@ -108,6 +120,7 @@ public class UDPReceive
             catch (Exception err)
             {
                 Debug.Log(err.ToString());
+                m_stayAlive = false;
             }
         }
     }
@@ -117,12 +130,18 @@ public class UDPReceive
        
         return m_lastReceivedUDPPacket;
     }
-
+    public bool m_stayAlive;
     public void Kill()
     {
+
+        m_stayAlive = false;
         if (m_receiveThread != null)
             m_receiveThread.Abort();
 
         m_client.Close();
     }
+    ~UDPReceive() { m_stayAlive = false; Kill(); }
+    
+
+    
 }
