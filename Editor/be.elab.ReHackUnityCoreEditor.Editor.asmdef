@@ -1,7 +1,7 @@
 
 {                                                                   
-            "name": "be.eloistree.ReHackUnityCoreEditor",          
-    "references": ["be.eloistree.ReHackUnityCore"
+            "name": "be.elab.ReHackUnityCoreEditor",          
+    "references": ["be.elab.ReHackUnityCore"
 ],                                                              
     "optionalUnityReferences": [],                                  
     "includePlatforms": [                                           
